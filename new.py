@@ -7,7 +7,7 @@ checkpoint_height_cm = 50 # (cm) height of the checkpoints (~7ft)
 height_leeway = 0.15 # (meter) leeway in height measurements
 
 trim_pitch = 0
-trim_roll = 10
+trim_roll = -20
 
 prefix = "Flight Control" #lolololol
 
@@ -19,7 +19,9 @@ dr.set_trim(trim_roll, trim_pitch)
 
 ## Utility Functions ##
 def reset():
-    dr.reset_move_values(2)
+    dr.set_pitch(0)
+    dr.set_yaw(0)
+    dr.set_roll(0)
 
 def meter_to_cm(cm) -> float:
     return cm * 100
@@ -42,16 +44,15 @@ def dprint(stuff):
 ## Movement ##
 ##############
 
-# take off, move to center of the checkpoints
 dprint("Taking off and hovering...")
 dr.takeoff()
 dr.hover(1)
 
 prefix = "Figure Eight"
-dprint("Performing.")
+dprint("== Performing...")
 dprint("Going to middle of the two checkpoints.")
 reset()
-dr.move_forward(3, "ft", 0.5)
+dr.move_forward(3.5, "ft", 0.5)
 sleep(2.5)
 
 dprint("Going above the checkpoints.")
@@ -61,13 +62,13 @@ sleep(2.5)
 
 dprint("Going past the checkpoints (above).")
 reset()
-dr.move_forward(4, "ft")
+dr.move_forward(1, "ft")
 sleep(2.3)
 
 dprint("Going down to allow going back in the middle of the two checkpoints.")
 reset()
-send_height_command_meters(-0.5)
-sleep(2)
+send_height_command_meters(-1.5)
+dr.move(2)
 
 dprint("Going back to the middle of the two checkpoints.")
 reset()
@@ -84,11 +85,15 @@ reset()
 dr.move_backward(3.5, "ft")
 sleep(2)
 
-dprint("Done")
+dprint("Done!")
 
 prefix = "2nd Mat"
-dprint("Performing")
+dprint("== Performing...")
+dprint("Done!")
 
 # Go above the checkpoints
 
+prefix = "Flight Control"
+dprint("Landing...")
 dr.land()
+dprint("Done :)")
