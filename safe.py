@@ -41,7 +41,7 @@ def partone(dr: Drone):
     # move below the second gate
     clearmove(dr)
     dr.set_throttle(-80)
-    dr.move(2)
+    dr.move(2.25)
 
     # back to middle
     clearmove(dr)
@@ -52,7 +52,7 @@ def partone(dr: Drone):
     # up above the first gate
     clearmove(dr)
     dr.set_throttle(50)
-    dr.move(1.5)
+    dr.move(1)
 
     # back in front of the first gate
     clearmove(dr)
@@ -65,18 +65,17 @@ def partone(dr: Drone):
     dr.set_throttle(-80)
     dr.move(3)
 
-    # skip keyhold
+    # skip keyhold - move to top of landing pad
     clearmove(dr)
     dr.set_pitch(100)
     dr.set_throttle(50)
-    dr.move(1.5)
+    dr.move(1.9)
 
     # move forward and right a bit to land on second pad
     clearmove(dr)
-    dr.set_pitch(60)
-    dr.set_roll(-50)
+    dr.set_roll(50)
     dr.set_throttle(60)
-    dr.move(0.25)
+    dr.move(0.3)
 
     # land on mat to do color detection
     dr.land()
