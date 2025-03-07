@@ -14,7 +14,6 @@ dr = Drone()
 dr.connect() # open serial conn
 dr.set_trim(10, 0) # stop drone from flying to the right for no flipping reason :(
 
-
 def partone(dr: Drone):
     # todo: color detection
 
