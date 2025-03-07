@@ -14,6 +14,7 @@ dr = Drone()
 dr.connect() # open serial conn
 dr.set_trim(10, 0) # stop drone from flying to the right for no flipping reason :(
 
+
 def partone(dr: Drone):
     # todo: color detection
 
@@ -40,7 +41,7 @@ def partone(dr: Drone):
     # move below the second gate
     clearmove(dr)
     dr.set_throttle(-80)
-    dr.move(2.5)
+    dr.move(2)
 
     # back to middle
     clearmove(dr)
@@ -72,8 +73,8 @@ def partone(dr: Drone):
 
     # move forward and right a bit to land on second pad
     clearmove(dr)
-    dr.set_pitch(20)
-    dr.set_roll(50)
+    dr.set_pitch(60)
+    dr.set_roll(-50)
     dr.set_throttle(60)
     dr.move(0.25)
 
@@ -83,7 +84,7 @@ def partone(dr: Drone):
 
     # take off and go through keyhole rings
 
-def parttwo(dr: Drone):
+def recovery(dr: Drone):
     # Finish detecting the color of the second color mat
     # and fly through the two hoop thingies
     dr.takeoff() # sleeps
@@ -99,14 +100,19 @@ def parttwo(dr: Drone):
     clearmove(dr)
     dr.set_roll(50)
     dr.set_throttle(30)
-    dr.move(2)
+    dr.move(1.5)
     clearmove(dr)
 
     # move down a bit to correct for the second hoop
     clearmove(dr)
     dr.set_throttle(-60)
     dr.set_roll(30)
-    dr.move(2)
+    dr.move(1.75)
+
+    # go up a tiny bit
+    clearmove(dr)
+    dr.set_throttle(50)
+    dr.move(0.25)
 
     # move through the second hoop
     clearmove(dr)
@@ -116,9 +122,9 @@ def parttwo(dr: Drone):
 
     # correct a bit for movement
     clearmove(dr)
-    dr.set_throttle(10)
-    dr.set_roll(50)
-    dr.move(0.25)
+    dr.set_throttle(30)
+    dr.set_roll(-50)
+    dr.move(0.5)
 
 partone(dr)
 
