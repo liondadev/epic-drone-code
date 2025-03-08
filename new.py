@@ -1,3 +1,6 @@
+import threading
+from threading import Thread
+
 from codrone_edu.drone import Drone
 from time import sleep
 
@@ -30,14 +33,15 @@ def cm_to_meter(meter) -> float:
     return meter / 100
 
 def send_height_command_meters(meter):
-    pos_data = dr.get_position_data()
-    x = pos_data[1]
-    y = pos_data[2]
+    dr.get_position_data()
+    x = 0
+    y = 0
     z = meter
+    dr.sendControlPosition(x, y, z, 0.5, 0, 0)
+    dr.sendControlPosition(x, y, z, 0.5, 0, 0)
     dr.sendControlPosition(x, y, z, 0.5, 0, 0)
 
 def dprint(stuff):
-    dr.controller_buzzer(400, 100)
     print("[" + prefix + "]", stuff)
 
 ##############
@@ -57,43 +61,96 @@ sleep(2.5)
 
 dprint("Going above the checkpoints.")
 reset()
+dr.get_position_data(0.25)
 send_height_command_meters(2.13)
 sleep(2.5)
 
 dprint("Going past the checkpoints (above).")
 reset()
-dr.move_forward(1, "ft")
+dr.get_position_data(0.25)
+dr.move_forward(3, "ft")
 sleep(2.3)
 
 dprint("Going down to allow going back in the middle of the two checkpoints.")
 reset()
-send_height_command_meters(-1.5)
+dr.get_position_data(0.25)
+send_height_command_meters(-.75)
 dr.move(2)
 
 dprint("Going back to the middle of the two checkpoints.")
 reset()
-dr.move_backward(2.5, "ft")
+dr.get_position_data(0.25)
+dr.move_backward(2.5, "ft", 1.5)
 sleep(2)
 
 dprint("Going to the top of the two checkpoints.")
 reset()
+dr.get_position_data(0.25)
 send_height_command_meters(2.13)
 sleep(2)
 
 dprint("Going in front of the first checkpoint.")
 reset()
+dr.get_position_data(0.25)
 dr.move_backward(3.5, "ft")
 sleep(2)
 
-dprint("Done!")
+dprint("Going down to be in front of the first checkpoint.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(-1)
+sleep(3)
 
-prefix = "2nd Mat"
+dprint("Going back through the course to get to the second mat.")
+reset()
+dr.get_position_data(0.25)
+dr.reset_move(2)
+dr.move_forward(11-2.13-1.5, "ft")
+sleep(2)
+
+dprint("Landing")
+dr.land()
+
+
+dprint("== Done!")
+
+################
+## SECOND MAT ##
+################
+
+prefix = "Second Loop"
 dprint("== Performing...")
-dprint("Done!")
 
-# Go above the checkpoints
+dr.takeoff()
+dr.hover(1)
+
+dprint("Going to meet first keyhole.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(1)
+sleep(2)
+
+dprint("Going through first keyhole")
+reset()
+dr.get_position_data(0.25)
+dr.move_right(5.5, "ft")
+sleep(2)
+
+dprint("Threading the drone sized needle!!!!")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(-0.25)
+sleep(1)
+
+dprint("Going through second keyhole")
+reset()
+dr.get_position_data(0.25)
+dr.move_backward(3.5, "ft")
+sleep(2)
+dprint("LAND NOW!!")
+dr.land()
+
+dprint("== Done!")
 
 prefix = "Flight Control"
-dprint("Landing...")
-dr.land()
 dprint("Done :)")
