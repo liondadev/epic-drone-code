@@ -1,12 +1,8 @@
-import threading
-from threading import Thread
-
 from codrone_edu.drone import Drone
 from time import sleep
 
 # Configuration Variables
 throttle = 50
-checkpoint_height_cm = 50 # (cm) height of the checkpoints (~7ft)
 height_leeway = 0.15 # (meter) leeway in height measurements
 
 trim_pitch = 0
@@ -119,7 +115,7 @@ dprint("Going back through the course to get to the second mat.")
 reset()
 dr.get_position_data(0.25)
 dr.reset_move(2)
-move_forward(11-2.13-1.5, "ft")
+move_forward(11-2.13-1, "ft")
 sleep(2)
 
 dprint("Correcting a bit...")
@@ -174,6 +170,13 @@ reset()
 dr.get_position_data(0.25)
 move_backward(3.5, "ft")
 sleep(2)
+
+dprint("Correcting")
+reset()
+dr.get_position_data(0.25)
+dr.move_left(0.5, "ft")
+sleep(0.5)
+
 dprint("LAND NOW!!")
 dr.land()
 
