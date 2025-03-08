@@ -62,81 +62,88 @@ def move_backward(*args):
 ## Movement ##
 ##############
 
-# dprint("Taking off and hovering...")
-# dr.takeoff()
-# dr.hover(1)
-#
-# prefix = "Figure Eight"
-# dprint("== Performing...")
-# dprint("Going to middle of the two checkpoints.")
-# reset()
-# move_forward(3.5, "ft", 0.5)
-# sleep(2.5)
-#
-# dprint("Going above the checkpoints.")
-# reset()
-# dr.get_position_data(0.25)
-# send_height_command_meters(2.13)
-# sleep(2.5)
-#
-# dprint("Going past the checkpoints (above).")
-# reset()
-# dr.get_position_data(0.25)
-# move_forward(3, "ft")
-# sleep(2.3)
-#
-# dprint("Going down to allow going back in the middle of the two checkpoints.")
-# reset()
-# dr.get_position_data(0.25)
-# send_height_command_meters(-.75)
-# dr.move(2)
-#
-# dprint("Going back to the middle of the two checkpoints.")
-# reset()
-# dr.get_position_data(0.25)
-# move_backward(2.5, "ft", 1.5)
-# sleep(2)
-#
-# dprint("Going to the top of the two checkpoints.")
-# reset()
-# dr.get_position_data(0.25)
-# send_height_command_meters(2.13)
-# sleep(2)
-#
-# dprint("Going in front of the first checkpoint.")
-# reset()
-# dr.get_position_data(0.25)
-# move_backward(3.5, "ft")
-# sleep(2)
-#
-# dprint("Going down to be in front of the first checkpoint.")
-# reset()
-# dr.get_position_data(0.25)
-# send_height_command_meters(-1)
-# sleep(3)
-#
-# dprint("Going back through the course to get to the second mat.")
-# reset()
-# dr.get_position_data(0.25)
-# dr.reset_move(2)
-# move_forward(11-2.13-1.5, "ft")
-# sleep(2)
-#
-# dprint("Correcting a bit...")
-# reset()
-# dr.get_position_data(0.25)
-# dr.reset_move(2)
-# move_right(0.5, "ft")
-#
-# dprint("Landing")
-# dr.land()
-# dr.reset_move_values(2)
-#
-# dprint("== Done!")
+dprint("Taking off and hovering...")
+dr.takeoff()
+dr.hover(1)
+
+prefix = "Figure Eight"
+dprint("== Performing...")
+dprint("Going to middle of the two checkpoints.")
+reset()
+move_forward(3.5, "ft", 0.5)
+sleep(2.5)
+
+dprint("Going above the checkpoints.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(2.13)
+sleep(2.5)
+
+dprint("Going past the checkpoints (above).")
+reset()
+dr.get_position_data(0.25)
+move_forward(3, "ft")
+sleep(2.3)
+
+dprint("Going down to allow going back in the middle of the two checkpoints.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(-.75)
+dr.move(2)
+
+dprint("Going back to the middle of the two checkpoints.")
+reset()
+dr.get_position_data(0.25)
+move_backward(2.5, "ft", 1.5)
+sleep(2)
+
+dprint("Going to the top of the two checkpoints.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(2.13)
+sleep(2)
+
+dprint("Going in front of the first checkpoint.")
+reset()
+dr.get_position_data(0.25)
+move_backward(3.5, "ft")
+sleep(2)
+
+dprint("Going down to be in front of the first checkpoint.")
+reset()
+dr.get_position_data(0.25)
+send_height_command_meters(-1)
+sleep(3)
+
+dprint("Going back through the course to get to the second mat.")
+reset()
+dr.get_position_data(0.25)
+dr.reset_move(2)
+move_forward(11-2.13-1.5, "ft")
+sleep(2)
+
+dprint("Correcting a bit...")
+reset()
+dr.get_position_data(0.25)
+dr.reset_move(2)
+move_right(0.5, "ft")
+
+dprint("Landing")
+dr.land()
+dr.reset_move_values(2)
+
+dprint("== Done!")
 
 ################
 ## SECOND MAT ##
 ################
+
+# repair to fix relativity lol
+dr.disconnect()
+dr.close()
+
+dr = Drone()
+dr.pair()
 
 prefix = "Second Loop"
 dprint("== Performing...")
