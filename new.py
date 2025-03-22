@@ -9,7 +9,7 @@ throttle = 50
 height_leeway = 0.15 # (meter) leeway in height measurements
 
 trim_pitch = 0
-trim_roll = -20
+trim_roll = -10
 
 prefix = "Flight Control" #lolololol
 
@@ -83,7 +83,7 @@ dprint("== Performing...")
 dprint("Going to middle of the two checkpoints.")
 reset()
 move_forward(3.5, "ft", 0.5)
-sleep(2.5)
+sleep(1.75)
 
 dprint("Going above the checkpoints.")
 reset()
@@ -132,7 +132,7 @@ reset()
 dr.get_position_data(0.25)
 dr.reset_move(2)
 move_forward(11-2.13-1, "ft")
-sleep(2)
+sleep(1.75)
 
 dprint("Correcting a bit...")
 reset()
@@ -187,7 +187,7 @@ sleep(1)
 dprint("Going through second keyhole")
 reset()
 dr.get_position_data(0.25)
-move_backward(4, "ft")
+move_backward(4.25, "ft")
 sleep(2)
 
 dprint("Correcting")
