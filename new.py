@@ -1,6 +1,9 @@
 from codrone_edu.drone import Drone
 from time import sleep
 
+# Color Detection
+color_dataset = "color_data"
+
 # Configuration Variables
 throttle = 50
 height_leeway = 0.15 # (meter) leeway in height measurements
@@ -15,6 +18,16 @@ dr.pair()
 
 ## Trimming ##
 dr.set_trim(trim_roll, trim_pitch)
+
+## Color Detection ##
+dr.load_color_data(color_dataset)
+
+def detect_color():
+    sleep(0.15)
+    color_data = dr.get_color_data()
+    color = dr.predict_colors(color_data)
+    print(color)
+    sleep(0.15)
 
 ## Utility Functions ##
 def reset():
@@ -57,6 +70,9 @@ def move_backward(*args):
 ##############
 ## Movement ##
 ##############
+
+dprint("Detecting Color...")
+detect_color()
 
 dprint("Taking off and hovering...")
 dr.takeoff()
@@ -129,6 +145,9 @@ dr.land()
 dr.reset_move_values(2)
 
 dprint("== Done!")
+
+dprint("Detecting Color...")
+detect_color()
 
 ################
 ## SECOND MAT ##
